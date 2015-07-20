@@ -1,43 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
-    <title>SMFG | Search</title>
-	</head>
-	<body>
-<div class="container-full">
+<title>SMFG | Search</title>
+</head>
+<body>
+  <div class="container-full">
 
-      <div class="row">
-       
-        <div class="col-lg-12 text-center v-center">
-          
-          <h1>Simple Method of Finding Genes</h1>
-          <p class="lead">A collection of genetic data in the human body.</p>
-          
-          <br><br><br>
-          
-          <form action="/search" class="col-lg-12">
-            <div class="input-group" style="width:auto;max-width:450px;text-align:center;margin:0 auto;">
+    <div class="row">
+
+      <div class="col-lg-12 text-center v-center">
+
+        <h1>Simple Method of Finding Genes</h1>
+        <p class="lead">A collection of genetic data in the human body.</p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" style="width:auto;max-width:450px;text-align:center;margin:0 auto;" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {{ message }}
+        </div>
+        <br>
+        {% endfor %}
+
+        {% endif %}
+        {% endwith %}
+        <form action="/search" class="col-lg-12">
+          <div class="input-group" style="width:auto;max-width:450px;text-align:center;margin:0 auto;">
             <input name="q" class="form-control input-lg" title="Seperate genes with spaces" placeholder="Gene Identifier" type="text">
-              <span class="input-group-btn"><button class="btn btn-lg btn-warning" type="submit">Search</button></span>
-            </div>
-            <div class="input-group" style="width:auto;max-width:450px;text-align:center;margin:0 auto;">
+            <span class="input-group-btn"><button class="btn btn-lg btn-warning" type="submit">Search</button></span>
+          </div>
+          <div class="input-group" style="width:auto;max-width:450px;text-align:center;margin:0 auto;">
             <label class="radio-inline"><input type="radio" name="method" value="search">Search</label>
-              <label class="radio-inline"><input type="radio" name="method" value="compare">Compare</label>
-            </div>
-            
-          </form>
-        </div>
-        
-      </div> <!-- /row -->
-  
-  	  <div class="row">
-        <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
-          <h3>Project Sponsors: </h3>
-          <a href="http://www.gersteinlab.org/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/gersteinlab.gif') }}" /></a>
-          <a href="http://www.yale.edu/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/yale.png') }}" /></a>
-        </div>
-      
+            <label class="radio-inline"><input type="radio" name="method" value="compare">Compare</label>
+          </div>
+
+        </form>
       </div>
-</div> <!-- /container full -->
+
+    </div> <!-- /row -->
+
+    <div class="row">
+      <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
+        <h3>Project Sponsors: </h3>
+        <a href="http://www.gersteinlab.org/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/gersteinlab.gif') }}" /></a>
+        <a href="http://www.yale.edu/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/yale.png') }}" /></a>
+      </div>
+      
+    </div>
+  </div> <!-- /container full -->
 
 <!--
 <div class="container">

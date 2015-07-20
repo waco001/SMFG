@@ -1,24 +1,10 @@
 ##
 ## Plots one to many genes given on the command line to 3 files in the specified output directory
 ##
-outputPlotsTo = "/home/waco001/Desktop/SMFG/Data/StuffForAbhishek/"
-load("/home/waco001/Desktop/SMFG/Data/TestDataForAbhishek.RData")
 
 
-##
-## Define and check inputs:
-##
-args<-commandArgs(TRUE)
-#args = c("1","CYC1","PIAS2","LPAR2")
-stopifnot(length(args) >= 2)
-if(length(args) >= 2){
-  request_UID = args[1]
-  geneIDs = args[-1]
-}else{ 
-  ## If no gene IDs are specified, throw an error message
-}
-
-
+outputPlotsTo = "/home/waco001/Desktop/SMFG/Python"
+load("/home/waco001/Desktop/SMFG/Python/TestDataForAbhishek.RData")
 ##
 ## Load dependencies
 ##
@@ -29,7 +15,15 @@ require(plyr)
 require(ggplot2)
 require(reshape2)
 
+makeGraphs <- function(directoryName, RUID, args){
 
+##
+## Define and check inputs:
+##
+#args<-commandArgs(TRUE)
+#args = c("1","CYC1","PIAS2","LPAR2")
+request_UID = RUID
+geneIDs = args
 
 ##
 ## Function to search for the geneID from a single input query
@@ -41,19 +35,19 @@ getGeneID = function(searchTerm, annotation=annotation.gencodeM4){
     tmp = unique(annotation[toupper(annotation$geneID) %in% toupper(searchTerm), colnames(annotation) %in% c("geneID","geneName")])
     toReturn[2] = tmp$geneID
     toReturn[3] = tmp$geneName
-  }else if(toupper(searchTerm) %in% toupper(annotation$geneName)){
-    tmp = unique(annotation[toupper(annotation$geneName) %in% toupper(searchTerm), colnames(annotation) %in% c("geneID","geneName")])
-    toReturn[2] = tmp$geneID
-    toReturn[3] = tmp$geneName
-  }else if(toupper(searchTerm) %in% toupper(annotation$transcriptID)){
-    tmp = unique(annotation[toupper(annotation$transcriptID) %in% toupper(searchTerm), ])
-    toReturn[2] = tmp$geneID
-    toReturn[3] = tmp$geneName
-  }else if(toupper(searchTerm) %in% toupper(annotation$transcriptName)){
-    tmp = unique(annotation[toupper(annotation$transcriptName) %in% toupper(searchTerm), ])
-    toReturn[2] = tmp$geneID
-    toReturn[3] = tmp$geneName
-  }else{
+    }else if(toupper(searchTerm) %in% toupper(annotation$geneName)){
+      tmp = unique(annotation[toupper(annotation$geneName) %in% toupper(searchTerm), colnames(annotation) %in% c("geneID","geneName")])
+      toReturn[2] = tmp$geneID
+      toReturn[3] = tmp$geneName
+      }else if(toupper(searchTerm) %in% toupper(annotation$transcriptID)){
+        tmp = unique(annotation[toupper(annotation$transcriptID) %in% toupper(searchTerm), ])
+        toReturn[2] = tmp$geneID
+        toReturn[3] = tmp$geneName
+        }else if(toupper(searchTerm) %in% toupper(annotation$transcriptName)){
+          tmp = unique(annotation[toupper(annotation$transcriptName) %in% toupper(searchTerm), ])
+          toReturn[2] = tmp$geneID
+          toReturn[3] = tmp$geneName
+          }else{
     ## no hits to full query, try partial matches with grep
     hit = unique(annotation[grep(searchTerm, annotation$geneID, ignore.case=T), colnames(annotation) %in% c("geneID","geneName"), drop=F])
     if(nrow(hit) > 0){
@@ -61,36 +55,36 @@ getGeneID = function(searchTerm, annotation=annotation.gencodeM4){
       toReturn[,1] = rep(searchTerm, nrow(hit))
       toReturn[,2] = hit$geneID
       toReturn[,3] = hit$geneName
-    }else{
-      hit = unique(annotation[grep(searchTerm, annotation$transcriptID, ignore.case=T), , drop=F])
-      if(nrow(hit) > 0){
-        toReturn = matrix(ncol=3,nrow=nrow(hit))
-        toReturn[,1] = rep(searchTerm, nrow(hit))
-        toReturn[,2] = hit$geneID
-        toReturn[,3] = hit$geneName
       }else{
-        hit = unique(annotation[grep(searchTerm, annotation$geneName, ignore.case=T), colnames(annotation) %in% c("geneID","geneName"), drop=F])
+        hit = unique(annotation[grep(searchTerm, annotation$transcriptID, ignore.case=T), , drop=F])
         if(nrow(hit) > 0){
           toReturn = matrix(ncol=3,nrow=nrow(hit))
           toReturn[,1] = rep(searchTerm, nrow(hit))
           toReturn[,2] = hit$geneID
           toReturn[,3] = hit$geneName
-        }else{
-          hit = unique(annotation[grep(searchTerm, annotation$transcriptName, ignore.case=T), , drop=F])
-          if(nrow(hit) > 0){
-            toReturn = matrix(ncol=3,nrow=nrow(hit))
-            toReturn[,1] = rep(searchTerm, nrow(hit))
-            toReturn[,2] = hit$geneID
-            toReturn[,3] = hit$geneName
           }else{
-            cat("Warning: Unable to find '",searchTerm,"'\n")
+            hit = unique(annotation[grep(searchTerm, annotation$geneName, ignore.case=T), colnames(annotation) %in% c("geneID","geneName"), drop=F])
+            if(nrow(hit) > 0){
+              toReturn = matrix(ncol=3,nrow=nrow(hit))
+              toReturn[,1] = rep(searchTerm, nrow(hit))
+              toReturn[,2] = hit$geneID
+              toReturn[,3] = hit$geneName
+              }else{
+                hit = unique(annotation[grep(searchTerm, annotation$transcriptName, ignore.case=T), , drop=F])
+                if(nrow(hit) > 0){
+                  toReturn = matrix(ncol=3,nrow=nrow(hit))
+                  toReturn[,1] = rep(searchTerm, nrow(hit))
+                  toReturn[,2] = hit$geneID
+                  toReturn[,3] = hit$geneName
+                  }else{
+                    cat("Warning: Unable to find '",searchTerm,"'\n")
+                  }
+                }
+              }
+            }
           }
+          return(toReturn)
         }
-      }
-    }
-  }
-  return(toReturn)
-}
 
 ##
 ## Function to get all geneIDs from multiple queries
@@ -110,8 +104,8 @@ getGeneIDs = function(searchTerms, annotation=annotation.gencodeM4){
 ##
 ## Plot mouse cell-type data
 ##
-plotGene_cellTypeSpecificity = function(genes, data=exprs.gene.lognorm, annotation=annotation.gencodeM4, celltypes=celltypes.all, ncol=NULL, outputPath=NULL){
-  
+plotGene_cellTypeSpecificity = function(genes, data=exprs.gene.lognorm, annotation=annotation.gencodeM4, celltypes=celltypes.all, ncol=NULL, outputPath=NULL, filename=NULL){
+
   gene = getGeneIDs(genes, annotation)$GeneName
   
   #unique(annotation[grep("HPCA",annotation$geneName, ignore.case=T), ]$geneName)
@@ -133,7 +127,9 @@ plotGene_cellTypeSpecificity = function(genes, data=exprs.gene.lognorm, annotati
   #ggplot(tmp.exprs, aes(y=10^Expression, x=CellType, colour=paste(geneName," (",geneID,")",sep=""), group=geneName)) +geom_point(alpha=1, size=5) +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +facet_wrap(~geneName, scales="free_y")+theme(legend.position="none")
   p = ggplot(tmp.exprs, aes(y=10^Expression, x=CellType, colour=level2, group=geneName, shape=isNonCoding)) +geom_point(alpha=1, size=5) +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +facet_wrap(~geneName, scales="free_y", ncol=ncol)+theme(legend.position="none") +ylab("TPM")
   
-  if(!is.null(outputPath)){ pdf(outputPath, width=7,height=7) }
+  dir.create(outputPath, showWarnings = FALSE)
+  svg(paste(outputPath,filename, sep=''))
+
   facetAdjust(p)
   if(!is.null(outputPath)){ dev.off() }
 }
@@ -143,8 +139,8 @@ plotGene_cellTypeSpecificity = function(genes, data=exprs.gene.lognorm, annotati
 ##
 ## Plot human organ-level data
 ##
-plotGene_Bodymap = function(genes, data=bodymap.exprs.tpm.norm.geneLevel, annotation=annotation.gencode21, sampleInfo=sampleInfo.bodymap, log_y=F, displayLegend=T, plotSex=F, ncol=NULL, outputPath=NULL){
-  
+plotGene_Bodymap = function(genes, data=bodymap.exprs.tpm.norm.geneLevel, annotation=annotation.gencode21, sampleInfo=sampleInfo.bodymap, log_y=F, displayLegend=T, plotSex=F, ncol=NULL, outputPath=NULL, filename=NULL){
+
   gene = getGeneIDs(genes, annotation)$GeneName
   
   tmp.ann = unique(annotation[annotation$geneName %in% gene, c(1,5:6,8:10)])
@@ -154,7 +150,7 @@ plotGene_Bodymap = function(genes, data=bodymap.exprs.tpm.norm.geneLevel, annota
   colnames(tmp.exprs)[7:8] = c("SampleID","Expression")
   
   if(log_y)
-    p = ggplot(tmp.exprs, aes(y=Expression+0.001, x=Tissue, colour=paste(geneName," (",geneID,")",sep=""), group=geneName)) +geom_point(alpha=1, size=3) +scale_y_log10() +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+  p = ggplot(tmp.exprs, aes(y=Expression+0.001, x=Tissue, colour=paste(geneName," (",geneID,")",sep=""), group=geneName)) +geom_point(alpha=1, size=3) +scale_y_log10() +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
   else{
     p = ggplot(tmp.exprs, aes(y=Expression, x=Tissue, colour=Tissue, group=geneName)) +geom_point(alpha=1, size=5) +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
     #p = ggplot(tmp.exprs, aes(bin=Expression, x=Tissue, colour=paste(geneName," (",geneID,")",sep=""), group=geneName)) +geom_bar() +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
@@ -166,26 +162,28 @@ plotGene_Bodymap = function(genes, data=bodymap.exprs.tpm.norm.geneLevel, annota
   if(length(unique(tmp.exprs$geneID)) == 1){
     if(plotSex){
       p = p+facet_grid(~Sex, scales="free_x")
-    }else{
-      p = p+facet_wrap(~geneName, scales="free_y", ncol=ncol)+theme(legend.position="none")
+      }else{
+        p = p+facet_wrap(~geneName, scales="free_y", ncol=ncol)+theme(legend.position="none")
+      }
+      }else{
+        p = p+facet_wrap(~geneName, scales="free_y", ncol=ncol)+theme(legend.position="none")
+      }
+
+      dir.create(outputPath, showWarnings = FALSE)
+      svg(paste(outputPath,filename,sep=""))
+
+      facetAdjust(p)
+      if(!is.null(outputPath)){ dev.off() }
+
     }
-  }else{
-    p = p+facet_wrap(~geneName, scales="free_y", ncol=ncol)+theme(legend.position="none")
-  }
-  
-  if(!is.null(outputPath)){ pdf(outputPath, width=7,height=7) }
-  facetAdjust(p)
-  if(!is.null(outputPath)){ dev.off() }
-  
-}
 
 
 
 ##
 ## Plot human brain development data
 ##
-plotGene_Brainspan = function(genes, data=brainspan.rpkms.mRNA, annotation=brainspan.featureInfo.rnaseq, annotation.official=annotation.gencode21, sampleInfo=sampleInfo.rnaseq, keepRegions=c("CBC","M1C","MD","S1C","STR","A1C","AMY","ITC","OFC","STC","HIP","IPC","MFC","V1C","DFC","VFC","NCX"), log_y=F, displayLegend=T, plotSex=F, title=NULL, collapseRegion=c("cortex","lobe","none"), outputPath=NULL){
-  
+plotGene_Brainspan = function(genes, data=brainspan.rpkms.mRNA, annotation=brainspan.featureInfo.rnaseq, annotation.official=annotation.gencode21, sampleInfo=sampleInfo.rnaseq, keepRegions=c("CBC","M1C","MD","S1C","STR","A1C","AMY","ITC","OFC","STC","HIP","IPC","MFC","V1C","DFC","VFC","NCX"), log_y=F, displayLegend=T, plotSex=F, title=NULL, collapseRegion=c("cortex","lobe","none"), outputPath=NULL, filename=NULL){
+
   gene = getGeneIDs(genes, annotation.official)$GeneName
   
   tmp.ann = annotation[annotation$GeneName %in% gene, ]
@@ -204,18 +202,18 @@ plotGene_Brainspan = function(genes, data=brainspan.rpkms.mRNA, annotation=brain
   if(collapseRegion == "cortex"){
     tmp.exprs$Region[tmp.exprs$Region %in% cortexRegions] = "NCX"
     tmp.exprs$Region = factor(tmp.exprs$Region, levels=c("NCX","HIP","AMY","STR","MD","CBC"))
-  }else if(collapseRegion == "lobe"){
-    tmp.exprs$Region[tmp.exprs$Region %in% c("DFC","M1C","MFC","OFC","VFC")] = "FC"
-    tmp.exprs$Region[tmp.exprs$Region %in% c("IPC","S1C")] = "PC"
-    tmp.exprs$Region[tmp.exprs$Region %in% c("A1C","STC","ITC")] = "TC"
-    tmp.exprs$Region[tmp.exprs$Region %in% c("V1C")] = "OC"
-    tmp.exprs$Region = factor(tmp.exprs$Region, levels=c("FC","PC","TC","OC","HIP","AMY","STR","MD","CBC"))
-  }else{
-    tmp.exprs$Region = factor(tmp.exprs$Region, levels=c(cortexRegions,"HIP","AMY","STR","MD","CBC"))
-  }
-  
-  dim(tmp.exprs)
-  
+    }else if(collapseRegion == "lobe"){
+      tmp.exprs$Region[tmp.exprs$Region %in% c("DFC","M1C","MFC","OFC","VFC")] = "FC"
+      tmp.exprs$Region[tmp.exprs$Region %in% c("IPC","S1C")] = "PC"
+      tmp.exprs$Region[tmp.exprs$Region %in% c("A1C","STC","ITC")] = "TC"
+      tmp.exprs$Region[tmp.exprs$Region %in% c("V1C")] = "OC"
+      tmp.exprs$Region = factor(tmp.exprs$Region, levels=c("FC","PC","TC","OC","HIP","AMY","STR","MD","CBC"))
+      }else{
+        tmp.exprs$Region = factor(tmp.exprs$Region, levels=c(cortexRegions,"HIP","AMY","STR","MD","CBC"))
+      }
+
+      dim(tmp.exprs)
+
   #if(log_y){
   #  p = ggplot(tmp.exprs, aes(y=Expression+0.001, x=Days, colour=paste(GeneName," (",GeneName,")",sep=""), group=GeneName)) +geom_point(alpha=1, size=1) +stat_smooth(method=loess,na.rm=T, size=2, alpha = 0.2) +scale_x_log10() +scale_y_log10()
   #}else{
@@ -229,7 +227,8 @@ plotGene_Brainspan = function(genes, data=brainspan.rpkms.mRNA, annotation=brain
   #}
   
   #facetAdjust(p)
-  if(!is.null(outputPath)){ pdf(outputPath, width=7,height=7) }
+  dir.create(outputPath, showWarnings = FALSE)
+  svg(paste(outputPath,filename,sep=""))
   print(p)
   if(!is.null(outputPath)){ dev.off() }
 }
@@ -247,7 +246,7 @@ facetAdjust <- function(x, pos = c("up", "down"), newpage = is.null(vp), vp = NU
   # part of print.ggplot
   ggplot2:::set_last_plot(x)
   if(newpage)
-    grid.newpage()
+  grid.newpage()
   pos <- match.arg(pos)
   p <- ggplot_build(x)
   gtable <- ggplot_gtable(p)
@@ -271,7 +270,7 @@ facetAdjust <- function(x, pos = c("up", "down"), newpage = is.null(vp), vp = NU
       # if pos == down then shifting labels down to the same level as 
       # the x-axis of last panel
       rows <- grep(paste0("axis_b\\-[", idx[1], "-", idx[n], "]"), 
-                   gtable$layout$name)
+       gtable$layout$name)
       lastAxis <- grep(paste0("axis_b\\-", panels), gtable$layout$name)
       gtable$layout[rows, c("t","b")] <- gtable$layout[lastAxis, c("t")]
     }
@@ -282,7 +281,7 @@ facetAdjust <- function(x, pos = c("up", "down"), newpage = is.null(vp), vp = NU
   }
   else{
     if (is.character(vp)) 
-      seekViewport(vp)
+    seekViewport(vp)
     else pushViewport(vp)
     grid.draw(gtable)
     upViewport()
@@ -296,10 +295,13 @@ facetAdjust <- function(x, pos = c("up", "down"), newpage = is.null(vp), vp = NU
 ##
 ## Finally, do the plots
 ##
-plotGene_cellTypeSpecificity(geneIDs, outputPath=paste(outputPlotsTo,"/",request_UID,"_celltypes.pdf",sep=""))
-plotGene_Bodymap(geneIDs, outputPath=paste(outputPlotsTo,"/",request_UID,"_bodymap.pdf",sep=""))
-plotGene_Brainspan(geneIDs, outputPath=paste(outputPlotsTo,"/",request_UID,"_brainspan.pdf",sep=""))
+
+plotGene_cellTypeSpecificity(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="celltypes.svg")
+plotGene_Bodymap(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="bodymap.svg")
+plotGene_Brainspan(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="brainspan.svg")
 
 #plotGene_cellTypeSpecificity(geneIDs)
 #plotGene_Brainspan(geneIDs)
 #plotGene_Bodymap(geneIDs)
+
+}
