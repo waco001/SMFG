@@ -24,7 +24,7 @@
 
         {% endif %}
         {% endwith %}
-        <form action="/search" class="col-lg-12">
+        <form id="geneSearch" class="col-lg-12">
           <div class="input-group" style="width:auto;max-width:450px;text-align:center;margin:0 auto;">
             <input name="q" class="form-control input-lg" title="Seperate genes with spaces" placeholder="Gene Identifier" type="text">
             <span class="input-group-btn"><button class="btn btn-lg btn-warning" type="submit">Search</button></span>
@@ -38,6 +38,18 @@
       </div>
 
     </div> <!-- /row -->
+    <div class="col-lg-12">
+        <table style="display: none;" class="data table table-bordered">
+                <thead class="sorted_head">
+                  <tr>
+                    <th>Gene Name</th><th>Brainspan</th>
+                    <th>Cell Type</th><th>Body Map</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+    </div>  
 
     <div class="row">
       <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
@@ -48,53 +60,77 @@
       
     </div>
   </div> <!-- /container full -->
+<script>
+$("#geneSearch").submit(function() {
 
-<!--
-<div class="container">
-  
-  	<hr>
-  
-  	<div class="row">
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-            Aliquam in felis sit amet augue.
-            </div>
-          </div>
-        </div>
-      	<div class="col-md-4">
-        	<div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-            Aliquam in felis sit amet augue.
-            </div>
-          </div>
-        </div>
-      	<div class="col-md-4">
-        	<div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-            Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-            dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-            Aliquam in felis sit amet augue.
-            </div>
-          </div>
-        </div>
-    </div>
-  
-	<div class="row">
-        <div class="col-lg-12">
-        <br><br>
-          <p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
-        <br><br>
-        </div>
-    </div>
-</div>
--->
+    var url = "/search1"; // the script where you handle the form input.
+
+    $.ajax({
+           type: "GET",
+           url: url,
+           data: $("#geneSearch").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+              $(".data").show();
+              var trHTML = '';
+              json = JSON.parse(data)
+              $.each(json['genes'], function (i, item) {
+                gene = item['gene'];
+              trHTML += '<tr><td>' + 
+              gene['gene_name'] + 
+              '</td><td>' + '<img class="dataimage" src="' +
+              gene['brainspan'] + '">' +
+              '</td><td>' + '<img class="dataimage" src="' +
+              gene['celltypes'] + '">' +
+              '</td><td>' + '<img class="dataimage" src="' +
+              gene['bodymap'] + '">'
+              '</td></tr>';
+              });
+
+              $('.data').append(trHTML);
+           }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});
+// Sortable rows
+$('.sorted_table').sortable({
+  containerSelector: 'table',
+  itemPath: '> tbody',
+  itemSelector: 'tr',
+  placeholder: '<tr class="placeholder"/>'
+});
+
+// Sortable column heads
+var oldIndex;
+$('.sorted_head tr').sortable({
+  containerSelector: 'tr',
+  itemSelector: 'th',
+  placeholder: '<th class="placeholder"/>',
+  vertical: false,
+  onDragStart: function ($item, container, _super) {
+    oldIndex = $item.index();
+    $item.appendTo($item.parent());
+    _super($item, container);
+  },
+  onDrop: function  ($item, container, _super) {
+    var field,
+        newIndex = $item.index();
+
+    if(newIndex != oldIndex) {
+      $item.closest('table').find('tbody tr').each(function (i, row) {
+        row = $(row);
+        if(newIndex < oldIndex) {
+          row.children().eq(newIndex).before(row.children()[oldIndex]);
+        } else if (newIndex > oldIndex) {
+          row.children().eq(newIndex).after(row.children()[oldIndex]);
+        }
+      });
+    }
+
+    _super($item, container);
+  }
+});
+</script>
 
 {% endblock %}

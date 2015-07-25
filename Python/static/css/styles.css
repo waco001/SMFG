@@ -69,3 +69,19 @@ img{border:none;}
   }
 
 /*  */
+/* Styles for draggable tables */
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+/* Style for data images */
+.dataimage {
+  width: 45px;
+  height: 45px;
+}

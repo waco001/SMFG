@@ -28,6 +28,7 @@ geneIDs = args
 ##
 ## Function to search for the geneID from a single input query
 ##
+
 getGeneID = function(searchTerm, annotation=annotation.gencodeM4){
   annotation = annotation[, colnames(annotation) %in% c("geneID","transcriptID","geneName","transcriptName")]
   toReturn = c(searchTerm,NA,NA)
@@ -295,7 +296,6 @@ facetAdjust <- function(x, pos = c("up", "down"), newpage = is.null(vp), vp = NU
 ##
 ## Finally, do the plots
 ##
-
 plotGene_cellTypeSpecificity(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="celltypes.svg")
 plotGene_Bodymap(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="bodymap.svg")
 plotGene_Brainspan(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="brainspan.svg")
