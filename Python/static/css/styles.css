@@ -29,7 +29,7 @@ h1 {
 }
 
 .v-center {
-  margin-top:7%;
+  margin-top: 0;
 }
 
 @import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
@@ -82,6 +82,6 @@ body.dragging, body.dragging * {
 
 /* Style for data images */
 .dataimage {
-  width: 45px;
-  height: 45px;
+  width: 380px;
+  height: 380px;
 }
