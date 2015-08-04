@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 import rpy2.robjects as ro
 import os, string, random, json
+from jinja2 import Template
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__)
 func = None
@@ -58,6 +59,7 @@ def search1():
     out = {}
     out['genes'] = []
     xnum = -1
+    list_item = []
     for x in QueryString:
         data = {}
         urls = {}
@@ -79,7 +81,10 @@ def search1():
         urls['celltypes'] = static_url + '/celltypes.svg'
         data['gene'] = urls
         out['genes'].append(data)
-    return json.dumps(out)
+        foo = str(render_template("list.html",data=out))
+        out['genes'] = []
+        list_item.append(foo)
+    return json.dumps(list_item).lstrip()
 
 if __name__ == "__main__":
     ro.r.source("PlotGenes.R")

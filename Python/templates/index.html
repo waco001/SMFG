@@ -25,110 +25,65 @@
         {% endif %}
         {% endwith %}
         <form id="geneSearch" class="col-lg-12">
-          <div class="input-group search" style="width:auto;max-width:450px;text-align:center;margin:0 auto;">
-            <input name="q" class="form-control input-lg search" title="Seperate genes with commas" placeholder="Gene Identifier" type="text">
-            <span class="input-group-btn"><button class="search btn btn-lg btn-warning" type="submit">Search</button></span>
+          <div class="input-group search" style="width:auto;max-width:595px;text-align:center;margin:0 auto;">
+            <input name="q" class="form-control input-md search" title="Seperate genes with commas" placeholder="Gene Identifier" type="text">
+            <span class="input-group-btn"><button class="search btn btn-md btn-warning" type="submit">Search</button></span>
           </div>
         </form>
+        <div class="input-group search" style="width:auto;text-align:center;margin:0 auto;">
+          <span class="input-group-btn">
+            <button class="showbtn showbrainspan search btn btn-sm btn-success">Show Brainspan</button>
+            <button class="showbtn showcelltypes search btn btn-sm btn-info">Show Cell Types</button>
+            <button class="showbtn showbodymap search btn btn-sm btn-danger">Show Body Map</button>
+            <button class="showbtn search btn btn-sm btn-primary">Reset</button>
+          </span>
+        </div>
       </div>
-
+      <br>
     </div> <!-- /row -->
-    <br>
-    <div class="col-lg-12">
-
-      <table style="display: none; margin: 0;" data-resizable-columns-id="demo-table" class="data table table-bordered">
-        <thead class="sorted_head">
-          <tr>
-            <th style="width: 10px;">Gene Name</th><th>Brainspan</th>
-            <th>Cell Type</th><th>Body Map</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>  
+    <div class="row">
+      <ul style="padding:0; margin:55px;" class="sortable selectable">
+      </ul>
+    </div>
     <div class="row">
       <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
         <h3>Project Sponsors: </h3>
         <a href="http://www.gersteinlab.org/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/gersteinlab.gif') }}" /></a>
         <a href="http://www.yale.edu/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/yale.png') }}" /></a>
       </div>
-      
     </div>
   </div> <!-- /container full -->
   <script>
-    $("#geneSearch").submit(function() {
-
-    var url = "/search1"; // the script where you handle the form input.
-
-    $.ajax({
-     type: "GET",
-     url: url,
-           data: $("#geneSearch").serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-            $(".data").show();
-            $(".data > tbody").html("");
-            $(".search").css('max-width','1270px')
-            var trHTML = '';
-            json = JSON.parse(data)
-            $.each(json['genes'], function (i, item) {
-              gene = item['gene'];
-              trHTML += '<tr><td style="width: 10px;">' + 
-              gene['gene_name'] + 
-              '</td><td>' + '<img class="dataimage" src="' +
-              gene['brainspan'] + '">' +
-              '</td><td>' + '<img class="dataimage" src="' +
-              gene['celltypes'] + '">' +
-              '</td><td>' + '<img class="dataimage" src="' +
-              gene['bodymap'] + '">'
-              '</td></tr>';
-            });
-
-            $('.data').append(trHTML);
-          }
-        });
-
-    return false; // avoid to execute the actual submit of the form.
-  });
-// Sortable rows
-$('.sorted_table').sortable({
-  containerSelector: 'table',
-  itemPath: '> tbody',
-  itemSelector: 'tr',
-  placeholder: '<tr class="placeholder"/>'
-});
-
-// Sortable column heads
-var oldIndex;
-$('.sorted_head tr').sortable({
-  containerSelector: 'tr',
-  itemSelector: 'th',
-  placeholder: '<th class="placeholder"/>',
-  vertical: false,
-  onDragStart: function ($item, container, _super) {
-    oldIndex = $item.index();
-    $item.appendTo($item.parent());
-    _super($item, container);
-  },
-  onDrop: function  ($item, container, _super) {
-    var field,
-    newIndex = $item.index();
-
-    if(newIndex != oldIndex) {
-      $item.closest('table').find('tbody tr').each(function (i, row) {
-        row = $(row);
-        if(newIndex < oldIndex) {
-          row.children().eq(newIndex).before(row.children()[oldIndex]);
-        } else if (newIndex > oldIndex) {
-          row.children().eq(newIndex).after(row.children()[oldIndex]);
+    $(function() {
+      $( ".sortable" ).sortable({ handle: '.draghandle' });
+      $( ".selectable" ).selectable();
+      $("#geneSearch").submit(function() {
+        $.ajax({
+          type: "GET",
+          url: '/search1',
+        data: $("#geneSearch").serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          $(".data").show();
+          $(".data > tbody").html("");
+          console.log(JSON.parse(data));
+          $.each(JSON.parse(data) , function(i, val) { 
+            $(".sortable").append(val);
+          });
         }
       });
-    }
+      return false; // avoid to execute the actual submit of the form.
+    });
+      $( ".showbrainspan" ).click(function() {
+        $( "ul > li.ui-selected" ).find( "div.brainspanimg" ).toggle();
+      });
+      $( ".showbodymap" ).click(function() {
+        $( "ul > li.ui-selected" ).find( "div.bodymapimg" ).toggle();
+      });
+      $( ".showcelltypes" ).click(function() {
+        $( "ul > li.ui-selected" ).find( "div.celltypesimg" ).toggle();
+      });
+    });
+  </script>
 
-    _super($item, container);
-  }
-});
-</script>
-
-{% endblock %}
+  {% endblock %}
