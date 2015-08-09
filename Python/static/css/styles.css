@@ -44,3 +44,9 @@ li {
   cursor: grab;
   cursor: -webkit-grab;
 }
+.plotimg {
+  width: 33%;
+}
+.plotdiv {
+  display: inline;
+}

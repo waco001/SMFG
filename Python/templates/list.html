@@ -6,15 +6,19 @@
         <b>
         {{gene['gene']['gene_name']|safe}}
         </b>
-        <i class="icon-move"></i>
-    <div class="brainspanimg" style='display:none;'>
-        {{gene['gene']['brainspan']|safe}}
+        <div style="float : right;">
+        Download:
+         <a href="{{gene['gene']['brainspan']|safe}}">Brainspan</a>&nbsp;<a href="{{gene['gene']['celltypes']|safe}}">Celltypes</a>&nbsp;<a href="{{gene['gene']['bodymap']|safe}}">Bodymap</a>
+         </div>
+        <br>
+    <div class="brainspandiv plotdiv">
+        <img class="plotimg" src="{{gene['gene']['brainspan']|safe}}" />
     </div>
-    <div class="celltypesimg" style='display:none;'>
-        {{gene['gene']['celltypes']|safe}}
+    <div class="celltypesdiv plotdiv">
+        <img class="plotimg" src="{{gene['gene']['celltypes']|safe}}" />
     </div>
-    <div class="bodymapimg" style='display:none;'>
-        {{gene['gene']['bodymap']|safe}}
+    <div class="bodymapdiv plotdiv">
+        <img class="plotimg" src="{{gene['gene']['bodymap']|safe}}" />
     </div>
 </li>
 {% endfor %}

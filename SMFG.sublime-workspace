@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"bloc",
+				"inline-block"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"list",
+				"list_item"
+			],
+			[
+				"widg",
+				"widgets"
+			],
+			[
+				"list-s",
+				"list-style-type"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"backgrou",
+				"background-color"
+			],
+			[
+				"stat",
+				"static_url"
+			],
+			[
+				"ge",
+				"geneurl"
+			],
+			[
+				"M",
+				"MULTI_DIR"
+			],
+			[
+				"dir",
+				"dir_gen"
+			],
+			[
 				"gene",
 				"gene_id"
 			],
@@ -47,31 +91,23 @@
 			"file": "Python/Main.py",
 			"settings":
 			{
-				"buffer_size": 1397,
+				"buffer_size": 3199,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Python/templates/base.html",
+			"file": "Python/templates/index.html",
 			"settings":
 			{
-				"buffer_size": 940,
+				"buffer_size": 4167,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Python/templates/gene.html",
+			"file": "Python/templates/list.html",
 			"settings":
 			{
-				"buffer_size": 1274,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Python/static/css/bootstrap.min.css",
-			"settings":
-			{
-				"buffer_size": 127019,
+				"buffer_size": 838,
 				"line_ending": "Unix"
 			}
 		},
@@ -79,15 +115,15 @@
 			"file": "Python/static/css/styles.css",
 			"settings":
 			{
-				"buffer_size": 1901,
+				"buffer_size": 736,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Python/static/js/HoverImage.js",
+			"file": "Python/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 1237,
+				"buffer_size": 756,
 				"line_ending": "Unix"
 			}
 		},
@@ -137,12 +173,20 @@
 		"/home/waco001/Desktop/SMFG/Python/static",
 		"/home/waco001/Desktop/SMFG/Python/static/css",
 		"/home/waco001/Desktop/SMFG/Python/static/js",
-		"/home/waco001/Desktop/SMFG/Python/templates"
+		"/home/waco001/Desktop/SMFG/Python/templates",
+		"/home/waco001/Desktop/SMFG/Python/static/css"
 	],
 	"file_history":
 	[
-		"/home/waco001/Desktop/SMFG/Python/static/js/HoverImage",
+		"/home/waco001/Desktop/SMFG/Python/static/css/jquery.gridster.min.css",
 		"/home/waco001/Desktop/SMFG/Python/templates/index.html",
+		"/home/waco001/Desktop/SMFG/Python/templates/compare.html",
+		"/home/waco001/Downloads/mountable-master/demo.html",
+		"/home/waco001/Desktop/SMFG/Python/templates/gene.html",
+		"/home/waco001/Downloads/PlotGenes.R",
+		"/home/waco001/Desktop/SMFG/Python/static/js/HoverImage.js",
+		"/home/waco001/Desktop/SMFG/Python/static/css/bootstrap.min.css",
+		"/home/waco001/Desktop/SMFG/Python/static/js/HoverImage",
 		"/home/waco001/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/waco001/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/waco001/Desktop/SMFG/Python/templates/search.html",
@@ -150,11 +194,9 @@
 		"/home/waco001/Desktop/SMFG/Data/fo/foo.R",
 		"/home/waco001/Desktop/SMFG/README.md",
 		"/home/waco001/Desktop/SMFG/Python/Main.py",
-		"/home/waco001/Desktop/SMFG/Python/templates/compare.html",
 		"/home/waco001/Desktop/SMFG/Python/static/css/styles.css",
 		"/home/waco001/Desktop/SMFG/Python/templates/base.html",
 		"/home/waco001/Desktop/SMFG/.time_sheet",
-		"/home/waco001/Desktop/SMFG/Python/static/css/bootstrap.min.css",
 		"/home/waco001/Downloads/index.html",
 		"/home/waco001/Downloads/startbootstrap-landing-page-1.0.4/README.md",
 		"/home/waco001/Dev/abhishekgorti/wsgi/templates/RobKitchen/index.html",
@@ -171,9 +213,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -181,6 +224,38 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ro",
+			"draghandle",
+			"row",
+			"#sortable",
+			";\">",
+			"img",
+			" ",
+			"+",
+			"'",
+			"<header>|||</header>",
+			"ul ",
+			"li ",
+			"li",
+			"table",
+			"th",
+			"td",
+			"tbod",
+			"table",
+			"tbod",
+			"  \n",
+			"table",
+			"bootstrap",
+			"jquery",
+			"request_UID",
+			"geneIDS",
+			"request_UID",
+			"request_",
+			"RUID",
+			"test",
+			"testrun2",
+			"geneIDs",
+			"args",
 			"a {",
 			"a",
 			"print",
@@ -234,6 +309,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
 			"svg(paste(outputPath,filename))",
 			"if(is.null(outputPath)){ dir.create(outputPath, showWarnings = FALSE)\n }",
 			"    ",
@@ -253,7 +329,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -262,106 +338,20 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1397,
+						"buffer_size": 3199,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1189,
-								1189
+								320,
+								320
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": -0.0,
-						"translation.y": 162.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Python/templates/base.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 940,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								904,
-								904
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 25.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Python/templates/gene.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1274,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1231,
-								1231
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "Python/static/css/bootstrap.min.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 127019,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -371,20 +361,86 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "Python/static/css/styles.css",
+					"buffer": 1,
+					"file": "Python/templates/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1901,
+						"buffer_size": 4167,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1890,
-								1890
+								4128,
+								4128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Python/templates/list.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 838,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								492,
+								492
+							],
+							[
+								615,
+								615
+							],
+							[
+								736,
+								736
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Python/static/css/styles.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 736,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								700,
+								700
 							]
 						],
 						"settings":
@@ -394,7 +450,36 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 606.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Python/templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 756,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								314,
+								314
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -402,36 +487,6 @@
 				},
 				{
 					"buffer": 5,
-					"file": "Python/static/js/HoverImage.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1237,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1129,
-								1129
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 162.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "Python/PlotGenes.R",
 					"semi_transient": false,
 					"settings":
@@ -443,8 +498,8 @@
 						"selection":
 						[
 							[
-								6485,
-								6485
+								911,
+								911
 							]
 						],
 						"settings":
@@ -453,11 +508,11 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 1998.0,
+						"translation.x": 81.0,
+						"translation.y": 4860.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -540,7 +595,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 130.0,
+	"side_bar_width": 233.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

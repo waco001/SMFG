@@ -25,17 +25,18 @@
         {% endif %}
         {% endwith %}
         <form id="geneSearch" class="col-lg-12">
-          <div class="input-group search" style="width:auto;max-width:595px;text-align:center;margin:0 auto;">
+          <div class="input-group search" style="width:auto;max-width:742px;text-align:center;margin:0 auto;">
             <input name="q" class="form-control input-md search" title="Seperate genes with commas" placeholder="Gene Identifier" type="text">
-            <span class="input-group-btn"><button class="search btn btn-md btn-warning" type="submit">Search</button></span>
+            <span class="input-group-btn"><button class="search btn btn-md btn-default" type="submit">Search</button></span>
           </div>
         </form>
         <div class="input-group search" style="width:auto;text-align:center;margin:0 auto;">
           <span class="input-group-btn">
-            <button class="showbtn showbrainspan search btn btn-sm btn-success">Show Brainspan</button>
-            <button class="showbtn showcelltypes search btn btn-sm btn-info">Show Cell Types</button>
-            <button class="showbtn showbodymap search btn btn-sm btn-danger">Show Body Map</button>
-            <button class="showbtn search btn btn-sm btn-primary">Reset</button>
+            <button class="showbtn showbrainspan search btn btn-sm btn-success">Toggle Brainspan</button>
+            <button class="showbtn showcelltypes search btn btn-sm btn-info">Toggle Cell Types</button>
+            <button class="showbtn showbodymap search btn btn-sm btn-danger">Toggle Body Map</button>
+            <button class="showbtn collapseselected search btn btn-sm btn-warning">Collapse Selected</button>
+            <button class="showbtn resetbtn search btn btn-sm btn-primary">Collapse All</button>
           </span>
         </div>
       </div>
@@ -60,7 +61,7 @@
       $("#geneSearch").submit(function() {
         $.ajax({
           type: "GET",
-          url: '/search1',
+          url: '/search',
         data: $("#geneSearch").serialize(), // serializes the form's elements.
         success: function(data)
         {
@@ -75,13 +76,23 @@
       return false; // avoid to execute the actual submit of the form.
     });
       $( ".showbrainspan" ).click(function() {
-        $( "ul > li.ui-selected" ).find( "div.brainspanimg" ).toggle();
+        //        $( "ul > li.ui-selected" ).find( "div.brainspandiv" ).toggle();
+        //For ones that are selected
+        $( "ul > li" ).find( "div.brainspandiv" ).toggle();
       });
       $( ".showbodymap" ).click(function() {
-        $( "ul > li.ui-selected" ).find( "div.bodymapimg" ).toggle();
+        $( "ul > li" ).find( "div.bodymapdiv" ).toggle();
       });
       $( ".showcelltypes" ).click(function() {
-        $( "ul > li.ui-selected" ).find( "div.celltypesimg" ).toggle();
+        $( "ul > li" ).find( "div.celltypesdiv" ).toggle();
+      });
+      $( ".resetbtn" ).click(function() {
+        $( "ul" ).find( "div.plotdiv" ).hide();
+      });
+      $( ".collapseselected" ).click(function() {
+        $( "ul > li.ui-selected" ).find( "div.brainspandiv" ).toggle();
+        $( "ul > li.ui-selected" ).find( "div.bodymapdiv" ).toggle();
+        $( "ul > li.ui-selected" ).find( "div.celltypesdiv" ).toggle();
       });
     });
   </script>
