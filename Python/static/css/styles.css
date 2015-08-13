@@ -50,3 +50,8 @@ li {
 .plotdiv {
   display: inline;
 }
+
+.chartconatiner{
+  background-color: white;
+  color: black;
+}

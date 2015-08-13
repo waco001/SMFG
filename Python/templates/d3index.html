@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<title>SMFG | Search</title>
+</head>
+<body>
+  <div class="container-full">
+
+  <div class="row">
+      <div class="col-lg-12 text-center v-center">
+
+        <h1>Simple Method of Finding Genes</h1>
+        <p class="lead">A collection of genetic data in the human body.</p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" style="width:auto;max-width:450px;text-align:center;margin:0 auto;" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {{ message }}
+        </div>
+        <br>
+        {% endfor %}
+
+        {% endif %}
+        {% endwith %}
+        <form id="geneSearch" class="col-lg-12">
+          <div class="input-group search" style="width:auto;max-width:742px;text-align:center;margin:0 auto;">
+            <input name="q" class="form-control input-md search" title="Seperate genes with commas" placeholder="Gene Identifier" type="text">
+            <span class="input-group-btn"><button class="search btn btn-md btn-default" type="submit">Search</button></span>
+          </div>
+        </form>
+      </div>
+    </div> <!-- /row -->
+    <div id="visuallist"class="row" style="margin-top: 10px; display: none;">
+      <div class="col-lg-12 chartconatiner">
+        <div id="chart"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center v-center" style="font-size:39pt;">
+        <h3>Project Sponsors: </h3>
+        <a href="http://www.gersteinlab.org/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/gersteinlab.gif') }}" /></a>
+        <a href="http://www.yale.edu/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/yale.png') }}" /></a>
+      </div>
+      </div>
+  </div> <!-- /container full -->
+  <script>
+    $(function() {
+      $("#geneSearch").submit(function() {
+        $.ajax({
+          type: "GET",
+          url: '/searchjsonapi',
+        data: $("#geneSearch").serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          $('#visuallist').show();
+          console.log(data);
+          data=JSON.parse(data);
+          for (var i = data.length - 1; i >= 0; i--) {
+            $('#visuallist').append($('<div>', 
+              {class: 'col-lg-12 chartconatiner',
+              rownum: i}));
+            $('div[rownum=' + i +']').append($('<div>', 
+              {class: 'chart-' + i}));
+            var chart = c3.generate({
+              bindto: '.chart-' + i,
+              data: {
+                  x : 'x',
+                  columns: [
+                      data[i].bodymap['category'],
+                      data[i].bodymap['data'],
+                  ],
+                  type: 'bar'
+              },
+              axis: {
+                  x: {
+                      type: 'category' // this needed to load string x value
+                  }
+              }
+          });
+          };
+          
+        }
+      });
+      return false; // avoid to execute the actual submit of the form.
+    });
+    });
+  </script>
+  {% endblock %}
