@@ -1,0 +1,17 @@
+{% for gene in data.genes %}
+<li style="padding:5px;">
+        <b>
+        {{gene['gene']['gene_name']|safe}}
+        </b>
+    <div class="brainspandiv plotdiv">
+        <img class="plotimg" src="{{gene['gene']['pdfbrainspan']|safe}}" />
+    </div>
+    <div class="celltypesdiv plotdiv">
+        <img class="plotimg" src="{{gene['gene']['pdfcelltypes']|safe}}" />
+    </div>
+    <div class="bodymapdiv plotdiv">
+        <img class="plotimg" src="{{gene['gene']['pdfbodymap']|safe}}" />
+        {{gene['gene']|safe}}
+    </div>
+</li>
+{% endfor %}

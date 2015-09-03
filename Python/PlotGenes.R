@@ -129,7 +129,7 @@ plotGene_cellTypeSpecificity = function(genes, data=exprs.gene.lognorm, annotati
   p = ggplot(tmp.exprs, aes(y=10^Expression, x=CellType, colour=level2, group=geneName, shape=isNonCoding)) +geom_point(alpha=1, size=5) +theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +facet_wrap(~geneName, scales="free_y", ncol=ncol)+theme(legend.position="none") +ylab("TPM")
   
   dir.create(outputPath, showWarnings = FALSE)
-  svg(paste(outputPath,filename, sep=''))
+  png(paste(outputPath,filename, sep=''))
 
   facetAdjust(p)
   if(!is.null(outputPath)){ dev.off() }
@@ -171,7 +171,7 @@ plotGene_Bodymap = function(genes, data=bodymap.exprs.tpm.norm.geneLevel, annota
       }
 
       dir.create(outputPath, showWarnings = FALSE)
-      svg(paste(outputPath,filename,sep=""))
+      png(paste(outputPath,filename,sep=""))
 
       facetAdjust(p)
       if(!is.null(outputPath)){ dev.off() }
@@ -229,7 +229,7 @@ plotGene_Brainspan = function(genes, data=brainspan.rpkms.mRNA, annotation=brain
   
   #facetAdjust(p)
   dir.create(outputPath, showWarnings = FALSE)
-  svg(paste(outputPath,filename,sep=""))
+  png(paste(outputPath,filename,sep=""))
   print(p)
   if(!is.null(outputPath)){ dev.off() }
 }
@@ -296,9 +296,9 @@ facetAdjust <- function(x, pos = c("up", "down"), newpage = is.null(vp), vp = NU
 ##
 ## Finally, do the plots
 ##
-plotGene_cellTypeSpecificity(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="celltypes.svg")
-plotGene_Bodymap(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="bodymap.svg")
-plotGene_Brainspan(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="brainspan.svg")
+plotGene_cellTypeSpecificity(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="celltypes.png")
+plotGene_Bodymap(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="bodymap.png")
+plotGene_Brainspan(geneIDs, outputPath=paste(outputPlotsTo,directoryName,sep=""), filename="brainspan.png")
 
 #plotGene_cellTypeSpecificity(geneIDs)
 #plotGene_Brainspan(geneIDs)

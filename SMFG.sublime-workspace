@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"categor",
+				"categories"
+			],
+			[
+				"col",
+				"columndata"
+			],
+			[
+				"cell",
+				"cellType"
+			],
+			[
+				"bod",
+				"bodymap"
+			],
+			[
+				"bo",
+				"bodymap"
+			],
+			[
+				"gen",
+				"genetotal"
+			],
+			[
+				"body",
+				"bodymap"
+			],
+			[
+				"gene",
+				"geneName"
+			],
+			[
+				"b",
+				"bodymap"
+			],
+			[
+				"MONG",
+				"MONGODB_C_HUMANBODYMAP"
+			],
+			[
+				"searc",
+				"search_by_genename"
+			],
+			[
+				"search_by_",
+				"search_by_geneid"
+			],
+			[
+				"sear",
+				"search_by_genename"
+			],
+			[
+				"row",
+				"rownum"
+			],
+			[
+				"json",
+				"json_projects"
+			],
+			[
 				"bloc",
 				"inline-block"
 			],
@@ -48,10 +108,6 @@
 				"dir_gen"
 			],
 			[
-				"gene",
-				"gene_id"
-			],
-			[
 				"out",
 				"outputPath"
 			],
@@ -88,10 +144,50 @@
 	"buffers":
 	[
 		{
+			"file": "Python/templates/d3index.html",
+			"settings":
+			{
+				"buffer_size": 2714,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Python/static/css/styles.css",
+			"settings":
+			{
+				"buffer_size": 1585,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "Python/Main.py",
 			"settings":
 			{
-				"buffer_size": 3199,
+				"buffer_size": 5034,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Python/static/js/multipiechart.js",
+			"settings":
+			{
+				"buffer_size": 5039,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "[\"subcerebral_projection_neurons:1\", \"endothelial:1\", \"callosal_projection_neurons:2\", \"newly_formed_oligodendrocyte:1\", \"endothelial:2\", \"newly_formed_oligodendrocyte:2\", \"myelinating_oligodendrocyte:1\", \"myelinating_oligodendrocyte:2\", \"oligodendrocyte_precursor:2\", \"oligodendrocyte_precursor:1\", \"Colgalt2_pyramidal_cortical_neurons:1\", \"Colgalt2_pyramidal_cortical_neurons:2\", \"Colgalt2_pyramidal_cortical_neurons:3\", \"astrocyte:1\", \"S100a10_pyramidal_cortical_neurons:2\", \"S100a10_pyramidal_cortical_neurons:1\", \"astrocyte:2\", \"corticothalamic_projection_neurons:1\", \"ChAT_cholinergic_striatal_neurons:1\", \"ChAT_cholinergic_striatal_neurons:3\", \"ChAT_cholinergic_striatal_neurons:2\", \"S100a10_pyramidal_cortical_neurons:3\", \"neuron:2\", \"neuron:1\", \"D1_striatal_neurons:1\", \"D1_striatal_neurons:2\", \"D1_striatal_neurons:3\", \"microglia:2\", \"microglia:1\"]\n  ",
+			"settings":
+			{
+				"buffer_size": 861,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Python/PlotGenes.R",
+			"settings":
+			{
+				"buffer_size": 13342,
 				"line_ending": "Unix"
 			}
 		},
@@ -99,7 +195,7 @@
 			"file": "Python/templates/index.html",
 			"settings":
 			{
-				"buffer_size": 4167,
+				"buffer_size": 4166,
 				"line_ending": "Unix"
 			}
 		},
@@ -112,26 +208,10 @@
 			}
 		},
 		{
-			"file": "Python/static/css/styles.css",
-			"settings":
-			{
-				"buffer_size": 736,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "Python/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 756,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Python/PlotGenes.R",
-			"settings":
-			{
-				"buffer_size": 13342,
+				"buffer_size": 1208,
 				"line_ending": "Unix"
 			}
 		}
@@ -178,6 +258,16 @@
 	],
 	"file_history":
 	[
+		"/home/waco001/Desktop/SMFG/Python/originalplot.R",
+		"/home/waco001/Desktop/SMFG/Python/PlotGenes.R",
+		"/home/waco001/Desktop/SMFG/new chart/index.html",
+		"/home/waco001/Desktop/SMFG/new chart/css/style.css",
+		"/home/waco001/Desktop/SMFG/new chart/js/index.js",
+		"/home/waco001/Desktop/SMFG/Python/templates/d3index.html",
+		"/home/waco001/Downloads/foo.js",
+		"/home/waco001/Downloads/iphone_3957.mobileconfig",
+		"/home/waco001/Desktop/SMFG/Python/CSV/maain/gene_key_merge.py",
+		"/home/waco001/Desktop/SMFG/Python/wsgi.py",
 		"/home/waco001/Desktop/SMFG/Python/static/css/jquery.gridster.min.css",
 		"/home/waco001/Desktop/SMFG/Python/templates/index.html",
 		"/home/waco001/Desktop/SMFG/Python/templates/compare.html",
@@ -209,7 +299,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -224,6 +314,58 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"NCX",
+			"celltyp",
+			":4",
+			":3",
+			":2",
+			":1",
+			":",
+			"chart",
+			"categ",
+			"absol",
+			"print",
+			"console.",
+			"\n",
+			"hover",
+			"gene",
+			"bodymap",
+			"+1",
+			"print",
+			"tool",
+			"30",
+			"10",
+			",",
+			",,",
+			" ",
+			"data",
+			"function",
+			"d",
+			"d\\\\\\\\\\\\",
+			"genes",
+			"d.",
+			"});",
+			"count",
+			"data",
+			"dataset",
+			"color",
+			"all",
+			"each",
+			"for",
+			"arc",
+			"pie",
+			"count",
+			"dataset",
+			"seriesNames",
+			"console.",
+			"JSON",
+			"chartcontainer",
+			"QueryList",
+			"url_f",
+			"search1",
+			"print",
+			"IMAGES",
+			"total",
 			"ro",
 			"draghandle",
 			"row",
@@ -299,9 +441,7 @@
 			"3F3E3A",
 			"a8a8a8",
 			"cfcfcf",
-			"p",
-			"static",
-			"\">"
+			"p"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -309,6 +449,11 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
+			",",
+			"8",
+			"\",\"",
+			",",
 			"",
 			"svg(paste(outputPath,filename))",
 			"if(is.null(outputPath)){ dir.create(outputPath, showWarnings = FALSE)\n }",
@@ -329,52 +474,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Python/Main.py",
+					"file": "Python/templates/d3index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3199,
+						"buffer_size": 2714,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								320,
-								320
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Python/templates/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4167,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4128,
-								4128
+								2101,
+								2101
 							]
 						],
 						"settings":
@@ -384,6 +501,121 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+						"translation.y": 855.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Python/static/css/styles.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1585,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1569,
+								1569
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1384.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Python/Main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3159,
+								3159
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1403.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Python/static/js/multipiechart.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5039,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4711,
+								4711
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1976.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 861,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								34,
+								34
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -391,7 +623,67 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 5,
+					"file": "Python/PlotGenes.R",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13342,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9688,
+								9688
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/R/R.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3548.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Python/templates/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4166,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2172,
+								2172
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 570.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "Python/templates/list.html",
 					"semi_transient": false,
 					"settings":
@@ -423,54 +715,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "Python/static/css/styles.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 736,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								700,
-								700
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 486.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
+					"buffer": 8,
 					"file": "Python/templates/base.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 756,
+						"buffer_size": 1208,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								314,
-								314
+								843,
+								843
 							]
 						],
 						"settings":
@@ -479,40 +741,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 57.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "Python/PlotGenes.R",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13342,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								911,
-								911
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/R/R.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 81.0,
-						"translation.y": 4860.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -520,7 +752,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 27.0
 	},
 	"input":
 	{

@@ -5,7 +5,7 @@
 <body>
   <div class="container-full">
 
-  <div class="row">
+    <div class="row">
       <div class="col-lg-12 text-center v-center">
 
         <h1>Simple Method of Finding Genes</h1>
@@ -33,7 +33,21 @@
     </div> <!-- /row -->
     <div id="visuallist"class="row" style="margin-top: 10px; display: none;">
       <div class="col-lg-12 chartconatiner">
-        <div id="chart"></div>
+        <div>
+          <table style="width:50%" id="table">
+            <thead>
+              <tr>
+                <th>Gene Name</th>
+                <th>Chromosone</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-left:auto; margin-right:auto; display:block;" id="chartpie"></div>
+        <div style="margin-left:auto; margin-right:auto; display:block;" id="chartscatter"></div>
       </div>
     </div>
     <div class="row">
@@ -42,7 +56,7 @@
         <a href="http://www.gersteinlab.org/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/gersteinlab.gif') }}" /></a>
         <a href="http://www.yale.edu/"><img style="width: 175px; height: 50px;" src="{{ url_for('static', filename='img/yale.png') }}" /></a>
       </div>
-      </div>
+    </div>
   </div> <!-- /container full -->
   <script>
     $(function() {
@@ -56,30 +70,9 @@
           $('#visuallist').show();
           console.log(data);
           data=JSON.parse(data);
-          for (var i = data.length - 1; i >= 0; i--) {
-            $('#visuallist').append($('<div>', 
-              {class: 'col-lg-12 chartconatiner',
-              rownum: i}));
-            $('div[rownum=' + i +']').append($('<div>', 
-              {class: 'chart-' + i}));
-            var chart = c3.generate({
-              bindto: '.chart-' + i,
-              data: {
-                  x : 'x',
-                  columns: [
-                      data[i].bodymap['category'],
-                      data[i].bodymap['data'],
-                  ],
-                  type: 'bar'
-              },
-              axis: {
-                  x: {
-                      type: 'category' // this needed to load string x value
-                  }
-              }
-          });
-          };
-          
+          createMultiplePieChart(data);
+          createCellTypesChart(data);
+          createTable(data);
         }
       });
       return false; // avoid to execute the actual submit of the form.
