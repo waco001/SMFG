@@ -37,9 +37,20 @@ def dir_gen(size=6, chars=string.ascii_uppercase + string.digits):
 #######################################CODE
 @app.route("/")
 def index():
+    """
+    Return the HTML for the homepage for the search API v1
+
+    Parameters:
+    """
     return render_template('index.html')
 @app.route('/search')
 def search():
+    """
+    Returns JSON for API v1. Sends template of images that are generated.
+
+    Parameters:
+      args(NS)     - Not Supplied; Used to get gene list
+    """
     args = request.args
     QueryArray = [x.strip() for x in args.get('q').split(',')]
     out = {}
@@ -77,6 +88,13 @@ def search():
     return json.dumps(list_item).lstrip()
 # Utility function
 def convertHtmlToPdf(sourceHtml, outputFilename):
+    """
+    Does the actual saving of PDF using HTML
+
+    Parameters:
+      sourceHtml     - HTML Code that is already
+      outputFilename - Name of PDF File
+    """
     # open output file for writing (truncated binary)
     resultFile = open(outputFilename, "w+b")
     # convert HTML to PDF
@@ -89,6 +107,13 @@ def convertHtmlToPdf(sourceHtml, outputFilename):
     return pisaStatus.err
 @app.route("/searchjsonapi")
 def json_search_api():
+    """
+    Returns JSON Data for JSON API v2.
+
+    Parameters:
+      args(NS)  - Not Supplied; Used to get gene list.
+
+    """
     query = request.args['q']
     args = request.args
     QueryArray = [x.strip() for x in args.get('q').split(',')]
@@ -99,8 +124,24 @@ def json_search_api():
     connection.close()
     return json.dumps(data)
 def tableify(connection,gene):
+    """
+    Returns a dict of information for the table on page.
+
+    Parameters:
+      connection - connection to the mongodb database->collection
+      gene       - name of gene to get table data for
+
+    """
     return {'chromosome' : 'ch1', 'source' : 'HAVANA'}
 def cellType(connection,gene):
+    """
+    Return JSON for celltype data for genes
+
+    Parameters:
+      connection - connection to the mongodb database->collection
+      gene       - name of the gene to get celltype data for
+
+    """
     collection = connection[MONGODB_DB_NAME][MONGODB_C_MOUSEANNOTATION]
     match = {}
     geneID = collection.find_one({"geneID": re.compile(gene, re.IGNORECASE)},{'_id': False,"id" : False}) #regex the search term    
@@ -125,8 +166,23 @@ def cellType(connection,gene):
         return {"celltype-error":NOTHING_FOUND_ERROR}
     
 def relbodymapify(data):
+    """
+    Planned: Return data from bodify() with relative bodymap arcs. Largest gene = 1. Smallest would be a percentage of largest gene.
+
+    Parameters:
+      ?
+
+    """
     return {'bodymapAbsolute':"FOO"}
 def bodymapify(connection,gene):
+    """
+    Return JSON data for bodymap data for genes
+
+    Parameters:
+      connection   - connection to the mongodb database->collection
+      gene         - name of the gene to get bodymap data for
+
+    """
     collection = connection[MONGODB_DB_NAME][MONGODB_C_HUMANANNOTATION]
     match = {}
     geneID = collection.find_one({"geneID": re.compile(gene, re.IGNORECASE)},{'_id': False,"id" : False}) #regex the search term    
@@ -153,6 +209,11 @@ def bodymapify(connection,gene):
         return {'bodymap-error' : NOTHING_FOUND_ERROR}
 @app.route("/searchj")
 def json_search():
+    """
+    Return the HTML for the homepage for the JSON search API v2
+
+    Parameters:
+    """
     return render_template("d3index.html")
 if __name__ == "__main__":
     ro.r.source("PlotGenes.R")

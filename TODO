@@ -1,0 +1,8 @@
+# * = Important
+Main.py:
+        search():
+            -Fix PDF generation
+        tableify():
+*           -Switch to actual Table
+        cellType():
+*          -Fix input/output issues
